@@ -1,28 +1,32 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { Theme } from '@radix-ui/themes';
-import "@radix-ui/themes/styles.css";
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { PrimeReactProvider } from 'primereact/api';
+import { store } from './stores/index.ts';
+import App from './App.tsx';
+import './flag.css';
+import './index.css';
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== 'development') {
-    return
+    return;
   }
- 
-  const { worker } = await import('../mocks/browser')
- 
+
+  const { worker } = await import('../mocks/browser');
+
   // `worker.start()` returns a Promise that resolves
   // once the Service Worker is up and ready to intercept requests.
-  return worker.start()
+  return worker.start();
 }
- 
+
 enableMocking().then(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
-      <Theme>
-        <App />
-      </Theme>
+      <PrimeReactProvider>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </PrimeReactProvider>
     </StrictMode>,
-  )
-})
+  );
+});

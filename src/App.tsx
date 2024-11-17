@@ -1,17 +1,14 @@
-
-import './App.css'
-import { SearchBar } from './components/search-bar'
-import { OrganizationTree } from './components/organization-tree'
-import { Box } from '@radix-ui/themes'
+import './App.css';
+import { SearchBar } from './components/search-bar';
+import { OrganizationTree } from './components/organization-tree';
 
 function App() {
-
   return (
-    <Box width="100vw" height="100%" p="4">
+    <div className="w-full h-full p-4">
       <SearchBar />
       <OrganizationTree />
-    </Box>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
